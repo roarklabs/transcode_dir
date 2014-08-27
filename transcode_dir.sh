@@ -1,10 +1,12 @@
 #! /bin/bash
 # transcode files of type $2 to $3 in dir $1
-# usage:  transcode_dir.sh /directory/path mp4 avi
+# usage:  transcode_dir.sh /directory/path mp4 avi 8
 
 from_ext=$2
 to_ext=$3
 dir=$1
+quality=$4
+
 #echo "Converting from: $from_ext to: $to_ext in directory: $dir ..."
 
 for file in $dir*.$from_ext;
@@ -19,5 +21,5 @@ for file in $dir*.$from_ext;
   # comment the line below out if you merely want to change the container of the file
   #ffmpeg -i $file -vcodec copy -acodec copy $file_name.$to_ext;
   # ffmpeg below transcodes video files from $from_ext to $to_ext with video quality scaled to 8
-  ffmpeg -i $file -qscale:v 8 $file_name.$to_ext;
+  ffmpeg -i $file -qscale:v $quality $file_name.$to_ext;
 done
